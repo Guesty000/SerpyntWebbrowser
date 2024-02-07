@@ -5,7 +5,22 @@ from PyQt5.QtGui import *
 from PyQt5.QtWebEngineWidgets import *
 
 class MainWindow(QMainWindow):
+    """
+    Main application window for the PyQt5 web browser.
+
+    This class sets up the main window, navigation toolbar, and manages tabs and URLs.
+    """
     def __init__(self, *args, **kwargs):
+        """
+        Initialize the MainWindow with a set of default properties and layouts.
+
+        Parameters
+        ----------
+        *args : tuple
+            Variable length argument list passed to the parent constructor.
+        **kwargs : dict
+            Arbitrary keyword arguments passed to the parent constructor.
+        """
         super(MainWindow, self).__init__(*args, **kwargs)
         self.tabs = QTabWidget()
         self.tabs.setDocumentMode(True)
@@ -22,6 +37,11 @@ class MainWindow(QMainWindow):
         self.show()
 
     def setup_navigation_toolbar(self):
+        """
+        Set up the navigation toolbar with common web browsing actions.
+
+        This includes buttons for going back, forward, reloading, going home, and stopping the page load.
+        """
         navtb = QToolBar("Navigation")
         self.addToolBar(navtb)
         actions = [
@@ -42,6 +62,17 @@ class MainWindow(QMainWindow):
         navtb.addWidget(self.urlbar)
 
     def add_new_tab(self, qurl=None, label="Blank"):
+        """
+        Add a new tab to the tab widget with the specified URL and label.
+
+        Parameters
+        ----------
+        qurl : QUrl, optional
+            The URL to load in the new tab, by default None which loads the homepage.
+        label : str, optional
+            The label for the new tab, by default 'Blank'.
+        """
+        
         if qurl is None:
             qurl = QUrl('http://www.google.com')
         browser = QWebEngineView()
